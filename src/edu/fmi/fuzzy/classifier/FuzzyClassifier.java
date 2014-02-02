@@ -9,6 +9,7 @@ import org.apache.lucene.queryparser.classic.ParseException;
 
 import edu.fmi.fuzzy.classifier.model.Genre;
 import edu.fmi.fuzzy.classifier.model.Movie;
+import edu.fmi.fuzzy.classifier.view.ClassificationView;
 
 public class FuzzyClassifier {
 
@@ -78,6 +79,10 @@ public class FuzzyClassifier {
 	public static void main(String[] args) {
 		final TrainingSet trainingSet = new TrainingSet();
 		final FuzzyClassifier classifier = new FuzzyClassifier(trainingSet);
-		classifier.classifyExample(new Movie(System.in));
+
+		final ClassificationView view = new ClassificationView();
+		view.setVisible(true);
+
+		// classifier.classifyExample(new Movie(System.in));
 	}
 }

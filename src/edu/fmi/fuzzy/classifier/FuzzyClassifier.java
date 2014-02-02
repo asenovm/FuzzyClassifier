@@ -7,6 +7,9 @@ import java.util.Map.Entry;
 
 import org.apache.lucene.queryparser.classic.ParseException;
 
+import edu.fmi.fuzzy.classifier.model.Genre;
+import edu.fmi.fuzzy.classifier.model.Movie;
+
 public class FuzzyClassifier {
 
 	private static final int NEIGHBOURS_CONSIDERED = 3;

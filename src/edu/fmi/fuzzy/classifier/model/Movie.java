@@ -1,10 +1,9 @@
-package edu.fmi.fuzzy.classifier;
+package edu.fmi.fuzzy.classifier.model;
 
 import java.io.InputStream;
 import java.util.Scanner;
 
 import org.json.JSONObject;
-import org.omg.CORBA.Environment;
 
 public class Movie {
 

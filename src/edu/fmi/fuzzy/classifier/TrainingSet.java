@@ -8,6 +8,8 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import edu.fmi.fuzzy.classifier.model.Movie;
+
 public class TrainingSet implements Iterable<Movie> {
 
 	/**

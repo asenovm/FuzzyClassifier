@@ -33,16 +33,6 @@ public class MovieIndexer {
 	/**
 	 * {@value}
 	 */
-	private static final int FIELD_TITLE_BOOST = 1000;
-
-	/**
-	 * {@value}
-	 */
-	private static final int FIELD_SUMMARY_BOOST = 20;
-
-	/**
-	 * {@value}
-	 */
 	private static final String FIELD_DIRECTOR = "director";
 
 	/**
@@ -83,7 +73,6 @@ public class MovieIndexer {
 
 		final TextField title = new TextField(FIELD_TITLE, movie.getTitle(),
 				Field.Store.YES);
-		title.setBoost(FIELD_TITLE_BOOST);
 		document.add(title);
 
 		final TextField primaryRole = new TextField(FIELD_PRIMARY_ROLE,
@@ -100,7 +89,6 @@ public class MovieIndexer {
 
 		final TextField summary = new TextField(FIELD_SUMMARY,
 				movie.getSummary(), Field.Store.YES);
-		summary.setBoost(FIELD_SUMMARY_BOOST);
 		document.add(summary);
 
 		try {

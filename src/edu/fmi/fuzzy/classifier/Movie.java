@@ -39,31 +39,6 @@ public class Movie {
 	/**
 	 * {@value}
 	 */
-	private static final String VALUE_ACTION = "action";
-
-	/**
-	 * {@value}
-	 */
-	private static final String VALUE_COMEDY = "comedy";
-
-	/**
-	 * {@value}
-	 */
-	private static final String VALUE_ADVENTURE = "adventure";
-
-	/**
-	 * {@value}
-	 */
-	private static final String VALUE_SCI_FI = "sci-fi";
-
-	/**
-	 * {@value}
-	 */
-	private static final String VALUE_THRILLER = "thriller";
-
-	/**
-	 * {@value}
-	 */
 	private final JSONObject movieMeta;
 
 	public Movie(final JSONObject movie) {
@@ -101,24 +76,8 @@ public class Movie {
 		return movieMeta.getString(SUMMARY);
 	}
 
-	public double getActionValue() {
-		return movieMeta.getDouble(VALUE_ACTION);
-	}
-
-	public double getComedyValue() {
-		return movieMeta.getDouble(VALUE_COMEDY);
-	}
-
-	public double getAdventureValue() {
-		return movieMeta.getDouble(VALUE_ADVENTURE);
-	}
-
-	public double getSciFiValue() {
-		return movieMeta.getDouble(VALUE_SCI_FI);
-	}
-
-	public double getThrillerValue() {
-		return movieMeta.getDouble(VALUE_THRILLER);
+	public double getGenreValue(Genre genre) {
+		return movieMeta.getDouble(genre.name().toLowerCase());
 	}
 
 	@Override

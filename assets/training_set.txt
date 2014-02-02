@@ -9,7 +9,7 @@
 		"action": "0.5",
 		"comedy": "0",
 		"adventure": "0.2",
-		"sci-fi": "0.3",
+		"scifi": "0.3",
 		"thriller": "0"
 	},{
 		"title": "Lone Survivor",
@@ -20,7 +20,7 @@
 		"action": "0.9",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0.1"
 	}, {
 		"title": "47 Ronin",
@@ -31,7 +31,7 @@
 		"action": "0.7",
 		"comedy": "0",
 		"adventure": "0.2",
-		"sci-fi": "0.1",
+		"scifi": "0.1",
 		"thriller": "0"
 	}, {
 		"title": "Thor",
@@ -42,7 +42,7 @@
 		"action": "0.6",
 		"comedy": "0",
 		"adventure": "0.2",
-		"sci-fi": "0.2",
+		"scifi": "0.2",
 		"thriller": "0"
 	}, {
 		"title": "Oblivion",
@@ -53,7 +53,7 @@
 		"action": "0.7",
 		"comedy": "0",
 		"adventure": "0.2",
-		"sci-fi": "0.1",
+		"scifi": "0.1",
 		"thriller": "0"
 	}, {
 		"title": "The Hobbit",
@@ -64,7 +64,7 @@
 		"action": "0.1",
 		"comedy": "0",
 		"adventure": "0.6",
-		"sci-fi": "0.3",
+		"scifi": "0.3",
 		"thriller": "0"
 	}, {
 		"title": "Frozen",
@@ -75,7 +75,7 @@
 		"action": "0",
 		"comedy": "0.2",
 		"adventure": "0.7",
-		"sci-fi": "0.1",
+		"scifi": "0.1",
 		"thriller": "0"
 	}, {
 		"title": "The Lord of the Rings",
@@ -86,7 +86,7 @@
 		"action": "0.2",
 		"comedy": "0.1",
 		"adventure": "0.4",
-		"sci-fi": "0.3",
+		"scifi": "0.3",
 		"thriller": "0"
 	}, {
 		"title": "Harry Potter",
@@ -97,7 +97,7 @@
 		"action": "0.1",
 		"comedy": "0.2",
 		"adventure": "0.4",
-		"sci-fi": "0.3",
+		"scifi": "0.3",
 		"thriller": "0"
 	}, {
 		"title": "Gladiator",
@@ -108,7 +108,7 @@
 		"action": "0.4",
 		"comedy": "0",
 		"adventure": "0.5",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0.1"
 	}, {
 		"title": "We're the Millers",
@@ -119,7 +119,7 @@
 		"action": "0.1",
 		"comedy": "0.9",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0"
 	}, {
 		"title": "Bridesmaids",
@@ -130,7 +130,7 @@
 		"action": "0",
 		"comedy": "1",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0"
 	}, {
 		"title": "Crazy, Stupid, Love",
@@ -141,7 +141,7 @@
 		"action": "0",
 		"comedy": "1",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0"
 	}, {
 		"title": "Superbad",
@@ -152,7 +152,7 @@
 		"action": "0",
 		"comedy": "1",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0"
 	}, {
 		"title": "Ted",
@@ -163,7 +163,7 @@
 		"action": "0.1",
 		"comedy": "0.8",
 		"adventure": "0",
-		"sci-fi": "0.1",
+		"scifi": "0.1",
 		"thriller": "0"
 	}, {
 		"title": "Riddick",
@@ -174,7 +174,7 @@
 		"action": "0.4",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0.5",
+		"scifi": "0.5",
 		"thriller": "0.1"
 	}, {
 		"title": "Iron Man",
@@ -185,7 +185,7 @@
 		"action": "0.3",
 		"comedy": "0",
 		"adventure": "0.1",
-		"sci-fi": "0.6",
+		"scifi": "0.6",
 		"thriller": "0"
 	}, {
 		"title": "Inception",
@@ -196,7 +196,7 @@
 		"action": "0.2",
 		"comedy": "0",
 		"adventure": "0.1",
-		"sci-fi": "0.6",
+		"scifi": "0.6",
 		"thriller": "0.1"
 	}, {
 		"title": "Avatar",
@@ -207,7 +207,7 @@
 		"action": "0.2",
 		"comedy": "0",
 		"adventure": "0.2",
-		"sci-fi": "0.6",
+		"scifi": "0.6",
 		"thriller": "0"
 	}, {
 		"title": "Transformers",
@@ -218,7 +218,7 @@
 		"action": "0.4",
 		"comedy": "0",
 		"adventure": "0.3",
-		"sci-fi": "0.3",
+		"scifi": "0.3",
 		"thriller": "0"
 	}, {
 		"title": "Gravity",
@@ -229,7 +229,7 @@
 		"action": "0.1",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0.3",
+		"scifi": "0.3",
 		"thriller": "0.6"
 	}, {
 		"title": "Prisoners",
@@ -240,7 +240,7 @@
 		"action": "0.2",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0.8"
 	}, {
 		"title": "The Dark Knight",
@@ -251,7 +251,7 @@
 		"action": "0.5",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0.1",
+		"scifi": "0.1",
 		"thriller": "0.4"
 	}, {
 		"title": "The Departed",
@@ -262,7 +262,7 @@
 		"action": "0.3",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0.7"
 	}, {
 		"title": "Argo",
@@ -273,7 +273,7 @@
 		"action": "0.2",
 		"comedy": "0",
 		"adventure": "0.1",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0.7"
 	}, {
 		"title": "Die Hard",
@@ -284,7 +284,7 @@
 		"action": "0.8",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0.2"
 	}, {
 		"title": "Father of the Bride",
@@ -295,7 +295,7 @@
 		"action": "0",
 		"comedy": "1",
 		"adventure": "0",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0"
 	}, {
 		"title": "Star Wars",
@@ -306,7 +306,7 @@
 		"action": "0.2",
 		"comedy": "0.1",
 		"adventure": "0.1",
-		"sci-fi": "0.5",
+		"scifi": "0.5",
 		"thriller": "0.1"
 	}, {
 		"title": "Indiana Jones",
@@ -317,7 +317,7 @@
 		"action": "0.3",
 		"comedy": "0",
 		"adventure": "0.7",
-		"sci-fi": "0",
+		"scifi": "0",
 		"thriller": "0"
 	}, {
 		"title": "The Matrix",
@@ -328,7 +328,7 @@
 		"action": "0.4",
 		"comedy": "0",
 		"adventure": "0",
-		"sci-fi": "0.4",
+		"scifi": "0.4",
 		"thriller": "0.2"
 	}
 	]

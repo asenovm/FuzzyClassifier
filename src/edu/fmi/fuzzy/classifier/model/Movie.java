@@ -44,15 +44,16 @@ public class Movie {
 		this.movieMeta = movie;
 	}
 
-	public Movie(final InputStream inputStream) {
-		final Scanner scanner = new Scanner(inputStream);
+	public Movie(final String title, final String primaryRole,
+			final String secondaryRole, final String director,
+			final String plotSummary) {
 		movieMeta = new JSONObject();
 
-		movieMeta.put(TITLE, scanner.nextLine());
-		movieMeta.put(PRIMARY_ROLE, scanner.nextLine());
-		movieMeta.put(SECONDARY_ROLE, scanner.nextLine());
-		movieMeta.put(DIRECTOR, scanner.nextLine());
-		movieMeta.put(SUMMARY, scanner.nextLine());
+		movieMeta.put(TITLE, title);
+		movieMeta.put(PRIMARY_ROLE, primaryRole);
+		movieMeta.put(SECONDARY_ROLE, secondaryRole);
+		movieMeta.put(DIRECTOR, director);
+		movieMeta.put(SUMMARY, plotSummary);
 	}
 
 	public String getTitle() {

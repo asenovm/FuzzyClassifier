@@ -11,7 +11,7 @@ import edu.fmi.fuzzy.classifier.model.Genre;
 import edu.fmi.fuzzy.classifier.model.Movie;
 import edu.fmi.fuzzy.classifier.view.ClassificationView;
 
-public class FuzzyClassifier {
+public class FuzzyClassifier implements OnSubmitListener {
 
 	private static final int NEIGHBOURS_CONSIDERED = 3;
 
@@ -26,6 +26,9 @@ public class FuzzyClassifier {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		final ClassificationView view = new ClassificationView(this);
+		view.setVisible(true);
 	}
 
 	public void classifyExample(Movie movie) {
@@ -79,10 +82,14 @@ public class FuzzyClassifier {
 	public static void main(String[] args) {
 		final TrainingSet trainingSet = new TrainingSet();
 		final FuzzyClassifier classifier = new FuzzyClassifier(trainingSet);
-
-		final ClassificationView view = new ClassificationView();
-		view.setVisible(true);
-
 		// classifier.classifyExample(new Movie(System.in));
+	}
+
+	@Override
+	public void onSubmit(String title, String primaryRole,
+			String secondaryRole, String director, String summary) {
+		final Movie inputMovie = new Movie(title, primaryRole, secondaryRole,
+				director, summary);
+		classifyExample(inputMovie);
 	}
 }

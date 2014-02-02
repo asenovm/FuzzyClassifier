@@ -26,4 +26,8 @@ public class ScrollableTextArea extends JScrollPane {
 		return textArea.getText();
 	}
 
+	public void disable() {
+		textArea.setEnabled(false);
+	}
+
 }

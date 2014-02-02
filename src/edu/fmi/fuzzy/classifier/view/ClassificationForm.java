@@ -1,5 +1,6 @@
 package edu.fmi.fuzzy.classifier.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,10 +29,22 @@ public class ClassificationForm extends JPanel {
 	 */
 	private static final int MARGIN_TOP_INITIAL = 15;
 
+	private static final String LABEL_RESULTS_THRILLER = "Thriller:";
+
+	private static final String LABEL_RESULTS_SCIFI = "Sci-Fi:";
+
+	private static final String LABEL_RESULTS_ADVENTURE = "Adventure:";
+
+	private static final String LABEL_RESULTS_COMEDY = "Comedy:";
+
+	private static final String LABEL_RESULTS_ACTION = "Action:";
+
+	private static final String LABEL_RESULTS = "Result classification:";
+
 	/**
 	 * {@value}
 	 */
-	private static final String LABEL_FORM = "Please fill in the following form:";
+	private static final String LABEL_INPUT = "Please fill in the following form:";
 
 	/**
 	 * {@value}
@@ -89,11 +102,18 @@ public class ClassificationForm extends JPanel {
 		final SpringLayout layout = new SpringLayout();
 		setLayout(layout);
 
-		final JLabel titleLabel = new JLabel(LABEL_FORM);
+		final JLabel titleLabel = new JLabel(LABEL_INPUT);
 		add(titleLabel);
 		layout.putConstraint(SpringLayout.NORTH, titleLabel,
 				MARGIN_TOP_INITIAL, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, titleLabel, MARGIN_LEFT,
+				SpringLayout.WEST, this);
+
+		final JLabel resultsLabel = new JLabel(LABEL_RESULTS);
+		add(resultsLabel);
+		layout.putConstraint(SpringLayout.NORTH, resultsLabel,
+				MARGIN_TOP_INITIAL, SpringLayout.NORTH, this);
+		layout.putConstraint(SpringLayout.WEST, resultsLabel, 360,
 				SpringLayout.WEST, this);
 
 		titleTextArea = new ScrollableTextArea();
@@ -102,12 +122,26 @@ public class ClassificationForm extends JPanel {
 		directorTextArea = new ScrollableTextArea();
 		summaryTextArea = new ScrollableTextArea();
 
-		attachAnswerBox(layout, titleTextArea, LABEL_TITLE, 35);
-		attachAnswerBox(layout, primaryRoleTextArea, LABEL_PRIMARY_ROLE, 70);
-		attachAnswerBox(layout, secondaryRoleTextArea, LABEL_SECONDARY_ROLE,
+		attachAnswerBox(layout, titleTextArea, LABEL_TITLE, 0, 35);
+		attachAnswerBox(layout, primaryRoleTextArea, LABEL_PRIMARY_ROLE, 0, 70);
+		attachAnswerBox(layout, secondaryRoleTextArea, LABEL_SECONDARY_ROLE, 0,
 				105);
-		attachAnswerBox(layout, directorTextArea, LABEL_DIRECTOR, 140);
-		attachAnswerBox(layout, summaryTextArea, LABEL_SUMMARY, 175, 200, 120);
+		attachAnswerBox(layout, directorTextArea, LABEL_DIRECTOR, 0, 140);
+		attachAnswerBox(layout, summaryTextArea, LABEL_SUMMARY, 0, 175, 200,
+				120);
+
+		final JLabel actionLabel = new JLabel("1");
+		final JLabel comedyLabel = new JLabel("2");
+		final JLabel adventureLabel = new JLabel("3");
+		final JLabel scifiLabel = new JLabel("4");
+		final JLabel thrillerLabel = new JLabel("5");
+
+		attachAnswerBox(layout, actionLabel, LABEL_RESULTS_ACTION, 350, 35);
+		attachAnswerBox(layout, comedyLabel, LABEL_RESULTS_COMEDY, 350, 70);
+		attachAnswerBox(layout, adventureLabel, LABEL_RESULTS_ADVENTURE, 350,
+				105);
+		attachAnswerBox(layout, scifiLabel, LABEL_RESULTS_SCIFI, 350, 140);
+		attachAnswerBox(layout, thrillerLabel, LABEL_RESULTS_THRILLER, 350, 175);
 
 		final JButton submitButton = new JButton("Classify");
 		add(submitButton);
@@ -120,14 +154,15 @@ public class ClassificationForm extends JPanel {
 	}
 
 	private void attachAnswerBox(final SpringLayout layout,
-			final ScrollableTextArea textArea, final String title,
-			final int offset) {
-		attachAnswerBox(layout, textArea, title, offset, 200, 20);
+			final Component textArea, final String title, final int offsetX,
+			final int offsetY) {
+		attachAnswerBox(layout, textArea, title, offsetX, offsetY, 200, 20);
 	}
 
 	private void attachAnswerBox(final SpringLayout layout,
-			final ScrollableTextArea textArea, final String labelText,
-			final int offset, final int width, final int height) {
+			final Component textArea, final String labelText,
+			final int offsetX, final int offsetY, final int width,
+			final int height) {
 
 		final JLabel label = new JLabel(labelText);
 		final Dimension labelDimension = new Dimension(100, 20);
@@ -136,17 +171,16 @@ public class ClassificationForm extends JPanel {
 
 		final Dimension dimension = new Dimension(width, height);
 		textArea.setPreferredSize(dimension);
-		textArea.setAutoscrolls(true);
 		add(textArea);
 
-		layout.putConstraint(SpringLayout.WEST, label, MARGIN_LEFT,
+		layout.putConstraint(SpringLayout.WEST, label, MARGIN_LEFT + offsetX,
 				SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, label, MARGIN_TOP_INITIAL
-				+ offset, SpringLayout.NORTH, this);
+				+ offsetY, SpringLayout.NORTH, this);
 
-		layout.putConstraint(SpringLayout.WEST, textArea, MARGIN_LEFT,
-				SpringLayout.EAST, label);
+		layout.putConstraint(SpringLayout.WEST, textArea, MARGIN_LEFT + offsetX
+				+ 100, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, textArea, MARGIN_TOP_INITIAL
-				+ offset, SpringLayout.NORTH, this);
+				+ offsetY, SpringLayout.NORTH, this);
 	}
 }

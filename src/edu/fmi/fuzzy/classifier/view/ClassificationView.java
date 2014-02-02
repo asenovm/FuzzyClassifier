@@ -14,7 +14,7 @@ public class ClassificationView extends JFrame {
 	public ClassificationView(final OnSubmitListener listener) {
 		super();
 
-		setSize(600, 400);
+		setSize(700, 400);
 		add(new ClassificationForm(listener));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 

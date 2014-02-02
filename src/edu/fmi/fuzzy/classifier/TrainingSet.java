@@ -1,13 +1,14 @@
 package edu.fmi.fuzzy.classifier;
 
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class TrainingSet {
+public class TrainingSet implements Iterable<Movie> {
 
 	/**
 	 * {@value}
@@ -50,5 +51,10 @@ public class TrainingSet {
 	@Override
 	public String toString() {
 		return movies.toString();
+	}
+
+	@Override
+	public Iterator<Movie> iterator() {
+		return movies.iterator();
 	}
 }

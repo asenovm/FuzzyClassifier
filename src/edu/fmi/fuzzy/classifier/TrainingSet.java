@@ -31,7 +31,7 @@ public class TrainingSet implements Iterable<Movie> {
 	public TrainingSet() {
 		movies = new LinkedList<Movie>();
 
-		final JsonInputReader reader = new JsonInputReader();
+		final JsonReader reader = new JsonReader();
 		JSONObject trainingData = new JSONObject();
 		try {
 			trainingData = reader.read(FILE_PATH_TRAINING_DATA);

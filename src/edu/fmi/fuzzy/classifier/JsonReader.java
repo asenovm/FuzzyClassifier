@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.json.JSONObject;
 
-public class JsonInputReader {
+public class JsonReader {
 
 	public JSONObject read(final String filePath) throws FileNotFoundException {
 		final Scanner scanner = new Scanner(new File(filePath));

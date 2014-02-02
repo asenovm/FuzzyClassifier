@@ -8,7 +8,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.TextField;
-import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -20,7 +20,7 @@ import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.RAMDirectory;
 import org.apache.lucene.util.Version;
 
-public class SummaryIndexer {
+public class MovieIndexer {
 
 	/**
 	 * {@value}
@@ -31,13 +31,13 @@ public class SummaryIndexer {
 
 	private final IndexWriter writer;
 
-	public SummaryIndexer() throws IOException {
-		indexedMovies = new ArrayList<Movie>();
-
+	public MovieIndexer() throws IOException {
 		final RAMDirectory indexDirectory = new RAMDirectory();
 		final IndexWriterConfig config = new IndexWriterConfig(
 				Version.LUCENE_46, new StandardAnalyzer(Version.LUCENE_46));
 		writer = new IndexWriter(indexDirectory, config);
+
+		indexedMovies = new ArrayList<Movie>();
 	}
 
 	public void index(final Movie movie) {
@@ -54,26 +54,21 @@ public class SummaryIndexer {
 		}
 	}
 
-	public void getClosestMatch(final String newPlot) {
+	public Movie getClosestMatch(final Movie movie) throws ParseException,
+			IOException {
 		final StandardAnalyzer analyzer = new StandardAnalyzer(
 				Version.LUCENE_46);
 		final QueryParser parser = new QueryParser(Version.LUCENE_46,
 				FIELD_SUMMARY, analyzer);
+		final Query query = parser.parse(movie.getSummary());
+		final TopScoreDocCollector collector = TopScoreDocCollector.create(1,
+				true);
 
-		try {
-			final Query query = parser.parse(newPlot);
-			final TopScoreDocCollector collector = TopScoreDocCollector.create(
-					2, true);
-			final IndexSearcher searcher = new IndexSearcher(IndexReader.open(
-					writer, true));
-			searcher.search(query, collector);
+		final IndexSearcher searcher = new IndexSearcher(DirectoryReader.open(
+				writer, true));
+		searcher.search(query, collector);
 
-			final ScoreDoc[] scoreDocs = collector.topDocs().scoreDocs;
-			System.out.println(indexedMovies.get(scoreDocs[0].doc));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		final ScoreDoc[] scoreDocs = collector.topDocs().scoreDocs;
+		return indexedMovies.get(scoreDocs[0].doc);
 	}
 }

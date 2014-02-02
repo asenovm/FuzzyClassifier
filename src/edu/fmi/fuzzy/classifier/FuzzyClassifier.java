@@ -2,23 +2,25 @@ package edu.fmi.fuzzy.classifier;
 
 import java.io.IOException;
 
+import org.apache.lucene.queryparser.classic.ParseException;
+
 public class FuzzyClassifier {
 
 	private final TrainingSet trainingSet;
 
 	public FuzzyClassifier(final TrainingSet trainingSet) {
 		this.trainingSet = trainingSet;
-		SummaryIndexer indexer;
+		MovieIndexer indexer;
 		try {
-			indexer = new SummaryIndexer();
+			indexer = new MovieIndexer();
 			for (final Movie movie : trainingSet) {
 				indexer.index(movie);
 			}
-
-			// TODO add GUI for all this stuff
 			final Movie inputMovie = new Movie(System.in);
-			indexer.getClosestMatch(inputMovie.getSummary());
+			indexer.getClosestMatch(inputMovie);
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}

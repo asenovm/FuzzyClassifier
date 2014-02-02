@@ -14,26 +14,38 @@ public class FuzzyClassifier {
 
 	private static final int NEIGHBOURS_CONSIDERED = 3;
 
+	private MovieIndexer indexer;
+
 	public FuzzyClassifier(final TrainingSet trainingSet) {
-		MovieIndexer indexer;
 		try {
 			indexer = new MovieIndexer();
 			for (final Movie movie : trainingSet) {
 				indexer.index(movie);
 			}
-			final Movie inputMovie = new Movie(System.in);
-			final Map<Movie, Float> neighbours = indexer.getClosestMatches(
-					inputMovie, NEIGHBOURS_CONSIDERED);
-
-			final Map<Genre, Float> genres = new HashMap<Genre, Float>();
-			computeGenreValues(neighbours, genres);
-			normalizeGenreValues(genres);
-			System.out.println(genres);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void classifyExample(Movie movie) {
+		Map<Movie, Float> neighbours = null;
+		try {
+			neighbours = indexer
+					.getClosestMatches(movie, NEIGHBOURS_CONSIDERED);
 		} catch (ParseException e) {
 			e.printStackTrace();
+			System.out.println("Can't classify this example due to error");
+			return;
+		} catch (IOException e) {
+			System.out.println("Can't classify this example due to error");
+			e.printStackTrace();
+			return;
 		}
+
+		final Map<Genre, Float> genres = new HashMap<Genre, Float>();
+		computeGenreValues(neighbours, genres);
+		normalizeGenreValues(genres);
+		System.out.println(genres);
 	}
 
 	private void computeGenreValues(final Map<Movie, Float> neighbours,
@@ -44,8 +56,8 @@ public class FuzzyClassifier {
 			for (final Entry<Movie, Float> entry : neighbours.entrySet()) {
 				final Movie currentMovie = entry.getKey();
 				nominator += currentMovie.getGenreValue(genre)
-						* (1f / Math.pow(entry.getValue(), 2));
-				denominator += (1f / Math.pow(entry.getValue(), 2));
+						* (1 / Math.pow(entry.getValue(), 2));
+				denominator += (1 / Math.pow(entry.getValue(), 2));
 			}
 			genres.put(genre, nominator / denominator);
 		}
@@ -66,5 +78,6 @@ public class FuzzyClassifier {
 	public static void main(String[] args) {
 		final TrainingSet trainingSet = new TrainingSet();
 		final FuzzyClassifier classifier = new FuzzyClassifier(trainingSet);
+		classifier.classifyExample(new Movie(System.in));
 	}
 }

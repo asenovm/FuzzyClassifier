@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import org.json.JSONObject;
+import org.omg.CORBA.Environment;
 
 public class Movie {
 
@@ -122,7 +123,17 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		return movieMeta.toString();
+		final StringBuilder builder = new StringBuilder();
+		builder.append(getTitle());
+		builder.append("\n");
+		builder.append(getPrimaryRole());
+		builder.append("\n");
+		builder.append(getSecondaryRole());
+		builder.append("\n");
+		builder.append(getDirector());
+		builder.append("\n");
+		builder.append(getSummary());
+		builder.append("\n");
+		return builder.toString();
 	}
-
 }

@@ -2,6 +2,7 @@ package edu.fmi.fuzzy.classifier;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -25,6 +26,42 @@ public class MovieIndexer {
 	/**
 	 * {@value}
 	 */
+	@SuppressWarnings("unused")
+	private static final String TAG = MovieIndexer.class.getSimpleName();
+
+	/**
+	 * {@value}
+	 */
+	private static final int FIELD_TITLE_BOOST = 100;
+
+	/**
+	 * {@value}
+	 */
+	private static final int FIELD_SUMMARY_BOOST = 20;
+
+	/**
+	 * {@value}
+	 */
+	private static final String FIELD_DIRECTOR = "director";
+
+	/**
+	 * {@value}
+	 */
+	private static final String FIELD_SECONDARY_ROLE = "secondaryRole";
+
+	/**
+	 * {@value}
+	 */
+	private static final String FIELD_PRIMARY_ROLE = "primaryRole";
+
+	/**
+	 * {@value}
+	 */
+	private static final String FIELD_TITLE = "title";
+
+	/**
+	 * {@value}
+	 */
 	private static final String FIELD_SUMMARY = "summary";
 
 	private final List<Movie> indexedMovies;
@@ -42,8 +79,27 @@ public class MovieIndexer {
 
 	public void index(final Movie movie) {
 		final Document document = new Document();
+
+		final TextField title = new TextField(FIELD_TITLE, movie.getTitle(),
+				Field.Store.YES);
+		title.setBoost(FIELD_TITLE_BOOST);
+		document.add(title);
+
+		final TextField primaryRole = new TextField(FIELD_PRIMARY_ROLE,
+				movie.getPrimaryRole(), Field.Store.YES);
+		document.add(primaryRole);
+
+		final TextField secondaryRole = new TextField(FIELD_SECONDARY_ROLE,
+				movie.getSecondaryRole(), Field.Store.YES);
+		document.add(secondaryRole);
+
+		final TextField director = new TextField(FIELD_DIRECTOR,
+				movie.getDirector(), Field.Store.YES);
+		document.add(director);
+
 		final TextField summary = new TextField(FIELD_SUMMARY,
 				movie.getSummary(), Field.Store.YES);
+		summary.setBoost(FIELD_SUMMARY_BOOST);
 		document.add(summary);
 
 		try {
@@ -54,21 +110,26 @@ public class MovieIndexer {
 		}
 	}
 
-	public Movie getClosestMatch(final Movie movie) throws ParseException,
-			IOException {
+	public List<Movie> getClosestMatches(final Movie movie,
+			final int numberOfHits) throws ParseException, IOException {
 		final StandardAnalyzer analyzer = new StandardAnalyzer(
 				Version.LUCENE_46);
 		final QueryParser parser = new QueryParser(Version.LUCENE_46,
 				FIELD_SUMMARY, analyzer);
-		final Query query = parser.parse(movie.getSummary());
-		final TopScoreDocCollector collector = TopScoreDocCollector.create(1,
-				true);
+		final Query query = parser.parse(movie.toString());
+		final TopScoreDocCollector collector = TopScoreDocCollector.create(
+				numberOfHits, true);
 
 		final IndexSearcher searcher = new IndexSearcher(DirectoryReader.open(
 				writer, true));
 		searcher.search(query, collector);
 
+		final List<Movie> result = new LinkedList<Movie>();
 		final ScoreDoc[] scoreDocs = collector.topDocs().scoreDocs;
-		return indexedMovies.get(scoreDocs[0].doc);
+		for (final ScoreDoc doc : scoreDocs) {
+			System.out.println("doc score is " + doc.score);
+			result.add(indexedMovies.get(doc.doc));
+		}
+		return result;
 	}
 }

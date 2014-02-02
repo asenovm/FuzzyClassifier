@@ -6,6 +6,8 @@ import org.apache.lucene.queryparser.classic.ParseException;
 
 public class FuzzyClassifier {
 
+	private static final int NEIGHBOURS_CONSIDERED = 5;
+
 	private final TrainingSet trainingSet;
 
 	public FuzzyClassifier(final TrainingSet trainingSet) {
@@ -17,7 +19,8 @@ public class FuzzyClassifier {
 				indexer.index(movie);
 			}
 			final Movie inputMovie = new Movie(System.in);
-			indexer.getClosestMatch(inputMovie);
+			System.out.println(indexer.getClosestMatches(inputMovie,
+					NEIGHBOURS_CONSIDERED));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {

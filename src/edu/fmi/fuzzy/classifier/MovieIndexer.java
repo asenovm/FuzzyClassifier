@@ -2,8 +2,9 @@ package edu.fmi.fuzzy.classifier;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -32,7 +33,7 @@ public class MovieIndexer {
 	/**
 	 * {@value}
 	 */
-	private static final int FIELD_TITLE_BOOST = 100;
+	private static final int FIELD_TITLE_BOOST = 1000;
 
 	/**
 	 * {@value}
@@ -110,7 +111,7 @@ public class MovieIndexer {
 		}
 	}
 
-	public List<Movie> getClosestMatches(final Movie movie,
+	public Map<Movie, Float> getClosestMatches(final Movie movie,
 			final int numberOfHits) throws ParseException, IOException {
 		final StandardAnalyzer analyzer = new StandardAnalyzer(
 				Version.LUCENE_46);
@@ -124,11 +125,10 @@ public class MovieIndexer {
 				writer, true));
 		searcher.search(query, collector);
 
-		final List<Movie> result = new LinkedList<Movie>();
+		final Map<Movie, Float> result = new LinkedHashMap<Movie, Float>();
 		final ScoreDoc[] scoreDocs = collector.topDocs().scoreDocs;
 		for (final ScoreDoc doc : scoreDocs) {
-			System.out.println("doc score is " + doc.score);
-			result.add(indexedMovies.get(doc.doc));
+			result.put(indexedMovies.get(doc.doc), 1 - doc.score);
 		}
 		return result;
 	}

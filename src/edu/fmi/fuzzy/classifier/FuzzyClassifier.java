@@ -13,11 +13,11 @@ import edu.fmi.fuzzy.classifier.view.ClassificationView;
 
 public class FuzzyClassifier implements OnSubmitListener {
 
-	private static final int NEIGHBOURS_CONSIDERED = 3;
+	private static final int NEIGHBOURS_COUNT = 1;
 
 	private MovieIndexer indexer;
 
-	private final OnItemClassifiedListener itemClassifiedListener;
+	private OnItemClassifiedListener itemClassifiedListener;
 
 	public FuzzyClassifier(final TrainingSet trainingSet) {
 		try {
@@ -28,69 +28,58 @@ public class FuzzyClassifier implements OnSubmitListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		final ClassificationView view = new ClassificationView(this);
-		view.setVisible(true);
-
-		itemClassifiedListener = view;
 	}
 
-	public void classifyExample(Movie movie) {
-		Map<Movie, Float> neighbours = null;
+	public void setOnItemClassifiedListener(OnItemClassifiedListener listener) {
+		itemClassifiedListener = listener;
+	}
+
+	public void classifyExample(final Movie movie) {
 		try {
-			neighbours = indexer
-					.getClosestMatches(movie, NEIGHBOURS_CONSIDERED);
+			final Map<Movie, Float> neighbours = indexer.getNeighbours(movie,
+					NEIGHBOURS_COUNT);
+
+			final Map<Genre, Float> genres = new HashMap<Genre, Float>();
+			computeGenreValues(neighbours, genres);
+
+			itemClassifiedListener.onItemClassified(genres.get(Genre.ACTION),
+					genres.get(Genre.COMEDY), genres.get(Genre.ADVENTURE),
+					genres.get(Genre.SCIFI), genres.get(Genre.THRILLER));
 		} catch (ParseException e) {
 			e.printStackTrace();
-			System.out.println("Can't classify this example due to error");
-			return;
 		} catch (IOException e) {
-			System.out.println("Can't classify this example due to error");
 			e.printStackTrace();
-			return;
 		}
-
-		final Map<Genre, Float> genres = new HashMap<Genre, Float>();
-		computeGenreValues(neighbours, genres);
-		normalizeGenreValues(genres);
-		itemClassifiedListener.onItemClassified(genres.get(Genre.ACTION),
-				genres.get(Genre.COMEDY), genres.get(Genre.ADVENTURE),
-				genres.get(Genre.SCIFI), genres.get(Genre.THRILLER));
 	}
 
 	private void computeGenreValues(final Map<Movie, Float> neighbours,
 			final Map<Genre, Float> genres) {
 		float nominator = 0f;
 		float denominator = 0f;
+		float total = 0f;
+
 		for (Genre genre : Genre.values()) {
 			for (final Entry<Movie, Float> entry : neighbours.entrySet()) {
-				final Movie currentMovie = entry.getKey();
-				nominator += currentMovie.getGenreValue(genre)
-						* (1 / Math.pow(entry.getValue(), 2));
-				denominator += (1 / Math.pow(entry.getValue(), 2));
+				final Movie movie = entry.getKey();
+				final float score = entry.getValue();
+				nominator += movie.getGenreValue(genre) * (1 / (score * score));
+				denominator += (1 / (score * score));
 			}
-			genres.put(genre, denominator != 0.0 ? nominator / denominator : 0f);
-		}
-	}
 
-	private void normalizeGenreValues(final Map<Genre, Float> genres) {
-		float total = 0f;
-		for (float genre : genres.values()) {
-			total += genre;
+			final float value = denominator != 0 ? nominator / denominator : 0f;
+			total += value;
+			genres.put(genre, value);
 		}
 
-		if (total != 0) {
-			final float coef = 1 / total;
-			for (final Entry<Genre, Float> entry : genres.entrySet()) {
-				genres.put(entry.getKey(), entry.getValue() * coef);
-			}
+		if (total == 0) {
+			return;
 		}
 
-	}
+		final float coef = 1 / total;
+		for (final Entry<Genre, Float> entry : genres.entrySet()) {
+			genres.put(entry.getKey(), entry.getValue() * coef);
+		}
 
-	public static void main(String[] args) {
-		final TrainingSet trainingSet = new TrainingSet();
-		final FuzzyClassifier classifier = new FuzzyClassifier(trainingSet);
 	}
 
 	@Override
@@ -99,5 +88,15 @@ public class FuzzyClassifier implements OnSubmitListener {
 		final Movie inputMovie = new Movie(title, primaryRole, secondaryRole,
 				director, summary);
 		classifyExample(inputMovie);
+	}
+
+	public static void main(String[] args) {
+		final TrainingSet trainingSet = new TrainingSet();
+		final FuzzyClassifier classifier = new FuzzyClassifier(trainingSet);
+
+		final ClassificationView view = new ClassificationView(classifier);
+		view.setVisible(true);
+
+		classifier.setOnItemClassifiedListener(view);
 	}
 }

@@ -75,5 +75,4 @@ public final class Label {
 	 * {@value}
 	 */
 	public static final String CLASSIFICATION_INITIAL_VALUE = "0.0";
-
 }

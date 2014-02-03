@@ -101,7 +101,7 @@ public class MovieIndexer {
 		}
 	}
 
-	public Map<Movie, Float> getClosestMatches(final Movie movie,
+	public Map<Movie, Float> getNeighbours(final Movie movie,
 			final int numberOfHits) throws ParseException, IOException {
 		final StandardAnalyzer analyzer = new StandardAnalyzer(
 				Version.LUCENE_46);

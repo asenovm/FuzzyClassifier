@@ -112,7 +112,7 @@ public class MovieIndexer {
 				numberOfHits, true);
 
 		final IndexSearcher searcher = new IndexSearcher(DirectoryReader.open(
-				writer, true));
+				writer, false));
 		searcher.search(query, collector);
 
 		final Map<Movie, Float> result = new LinkedHashMap<Movie, Float>();

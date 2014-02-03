@@ -1,8 +1,5 @@
 package edu.fmi.fuzzy.classifier.model;
 
-import java.io.InputStream;
-import java.util.Scanner;
-
 import org.json.JSONObject;
 
 public class Movie {

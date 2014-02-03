@@ -31,48 +31,6 @@ public class ClassificationForm extends JPanel implements
 	 */
 	private static final int MARGIN_TOP_INITIAL = 15;
 
-	private static final String LABEL_RESULTS_THRILLER = "Thriller:";
-
-	private static final String LABEL_RESULTS_SCIFI = "Sci-Fi:";
-
-	private static final String LABEL_RESULTS_ADVENTURE = "Adventure:";
-
-	private static final String LABEL_RESULTS_COMEDY = "Comedy:";
-
-	private static final String LABEL_RESULTS_ACTION = "Action:";
-
-	private static final String LABEL_RESULTS = "Result classification:";
-
-	/**
-	 * {@value}
-	 */
-	private static final String LABEL_INPUT = "Please fill in the following form:";
-
-	/**
-	 * {@value}
-	 */
-	private static final String LABEL_TITLE = "Movie Title:";
-
-	/**
-	 * {@value}
-	 */
-	private static final String LABEL_PRIMARY_ROLE = "Primary Role:";
-
-	/**
-	 * {@value}
-	 */
-	private static final String LABEL_SECONDARY_ROLE = "Secondary Role:";
-
-	/**
-	 * {@value}
-	 */
-	private static final String LABEL_DIRECTOR = "Director:";
-
-	/**
-	 * {@value}
-	 */
-	private static final String LABEL_SUMMARY = "Summary:";
-
 	private final OnSubmitListener listener;
 
 	private final ScrollableTextArea titleTextArea;
@@ -114,14 +72,14 @@ public class ClassificationForm extends JPanel implements
 		final SpringLayout layout = new SpringLayout();
 		setLayout(layout);
 
-		final JLabel titleLabel = new JLabel(LABEL_INPUT);
+		final JLabel titleLabel = new JLabel(Label.INPUT);
 		add(titleLabel);
 		layout.putConstraint(SpringLayout.NORTH, titleLabel,
 				MARGIN_TOP_INITIAL, SpringLayout.NORTH, this);
 		layout.putConstraint(SpringLayout.WEST, titleLabel, MARGIN_LEFT,
 				SpringLayout.WEST, this);
 
-		final JLabel resultsLabel = new JLabel(LABEL_RESULTS);
+		final JLabel resultsLabel = new JLabel(Label.RESULTS);
 		add(resultsLabel);
 		layout.putConstraint(SpringLayout.NORTH, resultsLabel,
 				MARGIN_TOP_INITIAL, SpringLayout.NORTH, this);
@@ -134,28 +92,28 @@ public class ClassificationForm extends JPanel implements
 		directorTextArea = new ScrollableTextArea();
 		summaryTextArea = new ScrollableTextArea();
 
-		attachAnswerBox(layout, titleTextArea, LABEL_TITLE, 0, 35);
-		attachAnswerBox(layout, primaryRoleTextArea, LABEL_PRIMARY_ROLE, 0, 70);
-		attachAnswerBox(layout, secondaryRoleTextArea, LABEL_SECONDARY_ROLE, 0,
+		attachAnswerBox(layout, titleTextArea, Label.TITLE, 0, 35);
+		attachAnswerBox(layout, primaryRoleTextArea, Label.PRIMARY_ROLE, 0, 70);
+		attachAnswerBox(layout, secondaryRoleTextArea, Label.SECONDARY_ROLE, 0,
 				105);
-		attachAnswerBox(layout, directorTextArea, LABEL_DIRECTOR, 0, 140);
-		attachAnswerBox(layout, summaryTextArea, LABEL_SUMMARY, 0, 175, 200,
+		attachAnswerBox(layout, directorTextArea, Label.DIRECTOR, 0, 140);
+		attachAnswerBox(layout, summaryTextArea, Label.SUMMARY, 0, 175, 200,
 				120);
 
-		actionLabel = new JLabel("0.0");
-		comedyLabel = new JLabel("0.0");
-		adventureLabel = new JLabel("0.0");
-		scifiLabel = new JLabel("0.0");
-		thrillerLabel = new JLabel("0.0");
+		actionLabel = new JLabel(Label.CLASSIFICATION_INITIAL_VALUE);
+		comedyLabel = new JLabel(Label.CLASSIFICATION_INITIAL_VALUE);
+		adventureLabel = new JLabel(Label.CLASSIFICATION_INITIAL_VALUE);
+		scifiLabel = new JLabel(Label.CLASSIFICATION_INITIAL_VALUE);
+		thrillerLabel = new JLabel(Label.CLASSIFICATION_INITIAL_VALUE);
 
-		attachAnswerBox(layout, actionLabel, LABEL_RESULTS_ACTION, 350, 35);
-		attachAnswerBox(layout, comedyLabel, LABEL_RESULTS_COMEDY, 350, 70);
-		attachAnswerBox(layout, adventureLabel, LABEL_RESULTS_ADVENTURE, 350,
+		attachAnswerBox(layout, actionLabel, Label.RESULTS_ACTION, 350, 35);
+		attachAnswerBox(layout, comedyLabel, Label.RESULTS_COMEDY, 350, 70);
+		attachAnswerBox(layout, adventureLabel, Label.RESULTS_ADVENTURE, 350,
 				105);
-		attachAnswerBox(layout, scifiLabel, LABEL_RESULTS_SCIFI, 350, 140);
-		attachAnswerBox(layout, thrillerLabel, LABEL_RESULTS_THRILLER, 350, 175);
+		attachAnswerBox(layout, scifiLabel, Label.RESULTS_SCIFI, 350, 140);
+		attachAnswerBox(layout, thrillerLabel, Label.RESULTS_THRILLER, 350, 175);
 
-		final JButton submitButton = new JButton("Classify");
+		final JButton submitButton = new JButton(Label.CLASSIFY);
 		add(submitButton);
 		layout.putConstraint(SpringLayout.WEST, submitButton,
 				MARGIN_LEFT + 140, SpringLayout.WEST, this);
@@ -200,6 +158,7 @@ public class ClassificationForm extends JPanel implements
 	public void onItemClassified(final float actionValue,
 			final float comedyValue, final float adventureValue,
 			final float scifiValue, final float thrillerValue) {
+		System.out.println(actionValue);
 		actionLabel.setText(Float.toString(actionValue));
 		comedyLabel.setText(Float.toString(comedyValue));
 		adventureLabel.setText(Float.toString(adventureValue));

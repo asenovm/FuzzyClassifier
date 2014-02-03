@@ -69,7 +69,7 @@ public class FuzzyClassifier implements OnSubmitListener {
 						* (1 / Math.pow(entry.getValue(), 2));
 				denominator += (1 / Math.pow(entry.getValue(), 2));
 			}
-			genres.put(genre, nominator / denominator);
+			genres.put(genre, denominator != 0.0 ? nominator / denominator : 0f);
 		}
 	}
 
@@ -79,16 +79,18 @@ public class FuzzyClassifier implements OnSubmitListener {
 			total += genre;
 		}
 
-		final float coef = 1 / total;
-		for (final Entry<Genre, Float> entry : genres.entrySet()) {
-			genres.put(entry.getKey(), entry.getValue() * coef);
+		if (total != 0) {
+			final float coef = 1 / total;
+			for (final Entry<Genre, Float> entry : genres.entrySet()) {
+				genres.put(entry.getKey(), entry.getValue() * coef);
+			}
 		}
+
 	}
 
 	public static void main(String[] args) {
 		final TrainingSet trainingSet = new TrainingSet();
 		final FuzzyClassifier classifier = new FuzzyClassifier(trainingSet);
-		// classifier.classifyExample(new Movie(System.in));
 	}
 
 	@Override

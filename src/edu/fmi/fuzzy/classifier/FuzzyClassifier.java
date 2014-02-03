@@ -17,6 +17,8 @@ public class FuzzyClassifier implements OnSubmitListener {
 
 	private MovieIndexer indexer;
 
+	private final OnItemClassifiedListener itemClassifiedListener;
+
 	public FuzzyClassifier(final TrainingSet trainingSet) {
 		try {
 			indexer = new MovieIndexer();
@@ -29,6 +31,8 @@ public class FuzzyClassifier implements OnSubmitListener {
 
 		final ClassificationView view = new ClassificationView(this);
 		view.setVisible(true);
+
+		itemClassifiedListener = view;
 	}
 
 	public void classifyExample(Movie movie) {
@@ -49,7 +53,9 @@ public class FuzzyClassifier implements OnSubmitListener {
 		final Map<Genre, Float> genres = new HashMap<Genre, Float>();
 		computeGenreValues(neighbours, genres);
 		normalizeGenreValues(genres);
-		System.out.println(genres);
+		itemClassifiedListener.onItemClassified(genres.get(Genre.ACTION),
+				genres.get(Genre.COMEDY), genres.get(Genre.ADVENTURE),
+				genres.get(Genre.SCIFI), genres.get(Genre.THRILLER));
 	}
 
 	private void computeGenreValues(final Map<Movie, Float> neighbours,

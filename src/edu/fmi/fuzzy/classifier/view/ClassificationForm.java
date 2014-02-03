@@ -10,9 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 
+import edu.fmi.fuzzy.classifier.OnItemClassifiedListener;
 import edu.fmi.fuzzy.classifier.OnSubmitListener;
 
-public class ClassificationForm extends JPanel {
+public class ClassificationForm extends JPanel implements
+		OnItemClassifiedListener {
 
 	/**
 	 * {@value}
@@ -73,15 +75,25 @@ public class ClassificationForm extends JPanel {
 
 	private final OnSubmitListener listener;
 
-	private ScrollableTextArea titleTextArea;
+	private final ScrollableTextArea titleTextArea;
 
-	private ScrollableTextArea primaryRoleTextArea;
+	private final ScrollableTextArea primaryRoleTextArea;
 
-	private ScrollableTextArea secondaryRoleTextArea;
+	private final ScrollableTextArea secondaryRoleTextArea;
 
-	private ScrollableTextArea directorTextArea;
+	private final ScrollableTextArea directorTextArea;
 
-	private ScrollableTextArea summaryTextArea;
+	private final ScrollableTextArea summaryTextArea;
+
+	private final JLabel actionLabel;
+
+	private final JLabel comedyLabel;
+
+	private final JLabel adventureLabel;
+
+	private final JLabel scifiLabel;
+
+	private final JLabel thrillerLabel;
 
 	private class ClassifyClickListener implements ActionListener {
 
@@ -130,11 +142,11 @@ public class ClassificationForm extends JPanel {
 		attachAnswerBox(layout, summaryTextArea, LABEL_SUMMARY, 0, 175, 200,
 				120);
 
-		final JLabel actionLabel = new JLabel("1");
-		final JLabel comedyLabel = new JLabel("2");
-		final JLabel adventureLabel = new JLabel("3");
-		final JLabel scifiLabel = new JLabel("4");
-		final JLabel thrillerLabel = new JLabel("5");
+		actionLabel = new JLabel("0.0");
+		comedyLabel = new JLabel("0.0");
+		adventureLabel = new JLabel("0.0");
+		scifiLabel = new JLabel("0.0");
+		thrillerLabel = new JLabel("0.0");
 
 		attachAnswerBox(layout, actionLabel, LABEL_RESULTS_ACTION, 350, 35);
 		attachAnswerBox(layout, comedyLabel, LABEL_RESULTS_COMEDY, 350, 70);
@@ -182,5 +194,16 @@ public class ClassificationForm extends JPanel {
 				+ 100, SpringLayout.WEST, this);
 		layout.putConstraint(SpringLayout.NORTH, textArea, MARGIN_TOP_INITIAL
 				+ offsetY, SpringLayout.NORTH, this);
+	}
+
+	@Override
+	public void onItemClassified(final float actionValue,
+			final float comedyValue, final float adventureValue,
+			final float scifiValue, final float thrillerValue) {
+		actionLabel.setText(Float.toString(actionValue));
+		comedyLabel.setText(Float.toString(comedyValue));
+		adventureLabel.setText(Float.toString(adventureValue));
+		scifiLabel.setText(Float.toString(scifiValue));
+		thrillerLabel.setText(Float.toString(thrillerValue));
 	}
 }

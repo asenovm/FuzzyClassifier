@@ -16,18 +16,28 @@ public class ClassificationView extends JFrame implements
 	 */
 	private static final long serialVersionUID = 9222532852127044087L;
 
+	/**
+	 * {@value}
+	 */
+	private static final int HEIGHT_VIEW = 400;
+
+	/**
+	 * {@value}
+	 */
+	private static final int WIDTH_VIEW = 700;
+
 	private final OnItemClassifiedListener itemClassifiedListener;
 
 	public ClassificationView(final OnSubmitListener listener) {
 		super();
 
-		setSize(700, 400);
-
 		final ClassificationForm form = new ClassificationForm(listener);
 		add(form);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(WIDTH_VIEW, HEIGHT_VIEW);
 
 		itemClassifiedListener = form;
+
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
 	@Override

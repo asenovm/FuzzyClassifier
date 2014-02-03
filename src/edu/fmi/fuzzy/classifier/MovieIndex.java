@@ -72,27 +72,16 @@ public class MovieIndex {
 
 	public void index(final Movie movie) {
 		final Document document = new Document();
-
-		final TextField title = new TextField(FIELD_TITLE, movie.getTitle(),
-				Field.Store.YES);
-		document.add(title);
-
-		final TextField primaryRole = new TextField(FIELD_PRIMARY_ROLE,
-				movie.getPrimaryRole(), Field.Store.YES);
-		document.add(primaryRole);
-
-		final TextField secondaryRole = new TextField(FIELD_SECONDARY_ROLE,
-				movie.getSecondaryRole(), Field.Store.YES);
-		document.add(secondaryRole);
-
-		final TextField director = new TextField(FIELD_DIRECTOR,
-				movie.getDirector(), Field.Store.YES);
-		document.add(director);
-
-		final TextField summary = new TextField(FIELD_SUMMARY,
-				movie.getSummary(), Field.Store.YES);
-		document.add(summary);
-
+		document.add(new TextField(FIELD_TITLE, movie.getTitle(),
+				Field.Store.YES));
+		document.add(new TextField(FIELD_PRIMARY_ROLE, movie.getPrimaryRole(),
+				Field.Store.YES));
+		document.add(new TextField(FIELD_SECONDARY_ROLE, movie
+				.getSecondaryRole(), Field.Store.YES));
+		document.add(new TextField(FIELD_DIRECTOR, movie.getDirector(),
+				Field.Store.YES));
+		document.add(new TextField(FIELD_SUMMARY, movie.getSummary(),
+				Field.Store.YES));
 		try {
 			writer.addDocument(document);
 			indexedMovies.add(movie);

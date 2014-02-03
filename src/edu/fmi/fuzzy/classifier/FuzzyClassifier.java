@@ -15,15 +15,15 @@ public class FuzzyClassifier implements OnSubmitListener {
 
 	private static final int NEIGHBOURS_COUNT = 1;
 
-	private MovieIndexer indexer;
+	private MovieIndex index;
 
-	private OnItemClassifiedListener itemClassifiedListener;
+	private OnItemClassifiedListener listener;
 
 	public FuzzyClassifier(final TrainingSet trainingSet) {
 		try {
-			indexer = new MovieIndexer();
+			index = new MovieIndex();
 			for (final Movie movie : trainingSet) {
-				indexer.index(movie);
+				index.index(movie);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -31,20 +31,14 @@ public class FuzzyClassifier implements OnSubmitListener {
 	}
 
 	public void setOnItemClassifiedListener(OnItemClassifiedListener listener) {
-		itemClassifiedListener = listener;
+		this.listener = listener;
 	}
 
 	public void classifyExample(final Movie movie) {
 		try {
-			final Map<Movie, Float> neighbours = indexer.getNeighbours(movie,
+			Map<Movie, Float> neighbours = index.getNeighbours(movie,
 					NEIGHBOURS_COUNT);
-
-			final Map<Genre, Float> genres = new HashMap<Genre, Float>();
-			computeGenreValues(neighbours, genres);
-
-			itemClassifiedListener.onItemClassified(genres.get(Genre.ACTION),
-					genres.get(Genre.COMEDY), genres.get(Genre.ADVENTURE),
-					genres.get(Genre.SCIFI), genres.get(Genre.THRILLER));
+			listener.onItemClassified(computeGenreValues(neighbours));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -52,8 +46,9 @@ public class FuzzyClassifier implements OnSubmitListener {
 		}
 	}
 
-	private void computeGenreValues(final Map<Movie, Float> neighbours,
-			final Map<Genre, Float> genres) {
+	private Map<Genre, Float> computeGenreValues(Map<Movie, Float> neighbours) {
+		final Map<Genre, Float> classification = new HashMap<Genre, Float>();
+
 		float nominator = 0f;
 		float denominator = 0f;
 		float total = 0f;
@@ -68,18 +63,17 @@ public class FuzzyClassifier implements OnSubmitListener {
 
 			final float value = denominator != 0 ? nominator / denominator : 0f;
 			total += value;
-			genres.put(genre, value);
+			classification.put(genre, value);
 		}
 
-		if (total == 0) {
-			return;
+		if (total != 0) {
+			final float coef = 1 / total;
+			for (final Entry<Genre, Float> entry : classification.entrySet()) {
+				classification.put(entry.getKey(), entry.getValue() * coef);
+			}
 		}
 
-		final float coef = 1 / total;
-		for (final Entry<Genre, Float> entry : genres.entrySet()) {
-			genres.put(entry.getKey(), entry.getValue() * coef);
-		}
-
+		return classification;
 	}
 
 	@Override

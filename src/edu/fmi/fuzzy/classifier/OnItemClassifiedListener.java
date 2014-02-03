@@ -1,7 +1,9 @@
 package edu.fmi.fuzzy.classifier;
 
+import java.util.Map;
+
+import edu.fmi.fuzzy.classifier.model.Genre;
+
 public interface OnItemClassifiedListener {
-	void onItemClassified(final float actionValue, final float comedyValue,
-			final float adventureValue, final float scifiValue,
-			final float thrillerValue);
+	void onItemClassified(final Map<Genre, Float> classification);
 }

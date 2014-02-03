@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,6 +13,7 @@ import javax.swing.SpringLayout;
 
 import edu.fmi.fuzzy.classifier.OnItemClassifiedListener;
 import edu.fmi.fuzzy.classifier.OnSubmitListener;
+import edu.fmi.fuzzy.classifier.model.Genre;
 
 public class ClassificationForm extends JPanel implements
 		OnItemClassifiedListener {
@@ -155,14 +157,11 @@ public class ClassificationForm extends JPanel implements
 	}
 
 	@Override
-	public void onItemClassified(final float actionValue,
-			final float comedyValue, final float adventureValue,
-			final float scifiValue, final float thrillerValue) {
-		System.out.println(actionValue);
-		actionLabel.setText(Float.toString(actionValue));
-		comedyLabel.setText(Float.toString(comedyValue));
-		adventureLabel.setText(Float.toString(adventureValue));
-		scifiLabel.setText(Float.toString(scifiValue));
-		thrillerLabel.setText(Float.toString(thrillerValue));
+	public void onItemClassified(final Map<Genre, Float> result) {
+		actionLabel.setText(Float.toString(result.get(Genre.ACTION)));
+		comedyLabel.setText(Float.toString(result.get(Genre.COMEDY)));
+		adventureLabel.setText(Float.toString(result.get(Genre.ADVENTURE)));
+		scifiLabel.setText(Float.toString(result.get(Genre.SCIFI)));
+		thrillerLabel.setText(Float.toString(result.get(Genre.THRILLER)));
 	}
 }

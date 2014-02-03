@@ -24,13 +24,13 @@ import org.apache.lucene.util.Version;
 
 import edu.fmi.fuzzy.classifier.model.Movie;
 
-public class MovieIndexer {
+public class MovieIndex {
 
 	/**
 	 * {@value}
 	 */
 	@SuppressWarnings("unused")
-	private static final String TAG = MovieIndexer.class.getSimpleName();
+	private static final String TAG = MovieIndex.class.getSimpleName();
 
 	/**
 	 * {@value}
@@ -61,7 +61,7 @@ public class MovieIndexer {
 
 	private final IndexWriter writer;
 
-	public MovieIndexer() throws IOException {
+	public MovieIndex() throws IOException {
 		final RAMDirectory indexDirectory = new RAMDirectory();
 		final IndexWriterConfig config = new IndexWriterConfig(
 				Version.LUCENE_46, new StandardAnalyzer(Version.LUCENE_46));

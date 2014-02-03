@@ -1,9 +1,12 @@
 package edu.fmi.fuzzy.classifier.view;
 
+import java.util.Map;
+
 import javax.swing.JFrame;
 
 import edu.fmi.fuzzy.classifier.OnItemClassifiedListener;
 import edu.fmi.fuzzy.classifier.OnSubmitListener;
+import edu.fmi.fuzzy.classifier.model.Genre;
 
 public class ClassificationView extends JFrame implements
 		OnItemClassifiedListener {
@@ -28,10 +31,8 @@ public class ClassificationView extends JFrame implements
 	}
 
 	@Override
-	public void onItemClassified(float actionValue, float comedyValue,
-			float adventureValue, float scifiValue, float thrillerValue) {
-		itemClassifiedListener.onItemClassified(actionValue, comedyValue,
-				adventureValue, scifiValue, thrillerValue);
+	public void onItemClassified(final Map<Genre, Float> classification) {
+		itemClassifiedListener.onItemClassified(classification);
 	}
 
 }

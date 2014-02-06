@@ -330,6 +330,72 @@
 		"adventure": "0",
 		"scifi": "0.4",
 		"thriller": "0.2"
+	}, {
+		"title": "Home Alone",
+		"primaryRole": "Macaulay Culkin",
+		"secondaryRole": "Joe Pesci",
+		"director": "Chris Columbus",
+		"summary": "It is Christmas time and the McCallister family is preparing for a vacation in Paris, France. But the youngest in the family named Kevin got into a scuffle with his older brother Buzz and was sent to his room which is on the third floor of his house. Then, the next morning, while the rest of the family was in a rush to make it to the airport on time, they completely forgot about Kevin who now has the house all to himself. Being home alone was fun for Kevin, having a pizza all to himself, jumping on his parents' bed, and making a mess. Then, Kevin discovers about two burglars, Harry and Marv, about to rob his house on Christmas Eve. Kevin acts quickly by wiring his own house with makeshift booby traps to stop the burglars and to bring them to justice.",
+		"action": "0",
+		"comedy": "1",
+		"adventure": "0",
+		"scifi": "0",
+		"thriller": "0"
+	}, {
+		"title": "300",
+		"primaryRole": "Gerard Butler",
+		"secondaryRole": "Lena Headey",
+		"director": "Zack Snyder",
+		"summary": "In the Battle of Thermopylae of 480 BC an alliance of Greek city-states fought the invading Persian army in the mountain pass of Thermopylae. Vastly outnumbered, the Greeks held back the enemy in one of the most famous last stands of history. Persian King Xerxes lead a Army of well over 100,000 (Persian king Xerxes before war has about 170,000 army) men to Greece and was confronted by 300 Spartans, and several hundred Arcadians. Xerxes waited for 10 days for King Leonidas to surrender or withdraw left with no options he moved. The battle lasted for about 3 days and after which all 300 Spartans were killed. The Spartan defeat was not the one expected, as a local shepherd, named Ephialtes, defected to the Persians and informed Xerxes of a separate path through Thermopylae, which the Persians could use to outflank the Greeks.",
+		"action": "0.8",
+		"comedy": "0",
+		"adventure": "0.2",
+		"scifi": "0",
+		"thriller": "0"
+	}, {
+		"title": "Pirates of the Caribbean",
+		"primaryRole": "Johnny Depp",
+		"secondaryRole": "Geoffrey Rush",
+		"director": "Gore Verbinski",
+		"summary": "This swash-buckling tale follows the quest of Captain Jack Sparrow, a savvy pirate, and Will Turner, a resourceful blacksmith, as they search for Elizabeth Swann. Elizabeth, the daughter of the governor and the love of Will's life, has been kidnapped by the feared Captain Barbossa. Little do they know, but the fierce and clever Barbossa has been cursed. He, along with his large crew, are under an ancient curse, doomed for eternity to neither live, nor die. That is, unless a blood sacrifice is made.",
+		"action": "0.1",
+		"comedy": "0.4",
+		"adventure": "0.5",
+		"scifi": "0",
+		"thriller": "0"
+	}, {
+		"title": "Welcome to the Jungle",
+		"primaryRole": "Kristen Schaal",
+		"secondaryRole": "Megan Boone",
+		"director": "Rob Meltzer",
+		"summary": "A company retreat on a tropical island goes terribly awry.",
+		"action": "0.2",
+		"comedy": "0.7",
+		"adventure": "0.1",
+		"scifi": "0",
+		"thriller": "0"
+	}, {
+		"title": "The Princess Diaries",
+		"primaryRole": "Julie Andrews",
+		"secondaryRole": "Anne Hathaway",
+		"director": "Garry Marshall",
+		"summary": "Mia Thermopolis is the average teenager - sweet, a little geeky and pretty much invisible to everyone with the exception of her mother, best friend Lilly and Lilly's older brother Michael. Making it through high school without throwing up is a challenge in itself for Mia, so it doesn't come as welcome news when her estranged grandmother shows up out of the blue and calmly informs her that she is in fact the heir to the throne of a European country called Genovia. Suddenly Mia's life is thrown into complete overload. She's being taught about scarves, waves and pears in order to become a perfect princess, she gets a makeover and a tough looking yet sweet bodyguard/limo driver called Joe. Things get out of hand when the media gets a hold of the story and suddenly Mia is thrust into the spotlight in both the newspapers and in school. On top of all that Mia has a choice to make. She must decide by Genovia's Independence Day Ball whether she longs to relinquish her claim on the throne or to...",
+		"action": "0",
+		"comedy": "1",
+		"adventure": "0",
+		"scifi": "0",
+		"thriller": "0"
+	}, {
+		"title": "Yes Man",
+		"primaryRole": "Jim Carrey",
+		"secondaryRole": "Zooey Deschanel",
+		"director": "Peyton Reed",
+		"summary": "Carl Allen is at a standstill. No future... Until the day he enrolls into a personal development program based on a very simple idea: say yes to everything! Carl discovers with amazement the magical power of Yes and sees his professional and romantic life turned upside down overnight: an unexpected promotion and a new girlfriend. But he will soon discover that better can be good's enemy, and that all opportunities shouldn't be taken. ",
+		"action": "0",
+		"comedy": "1",
+		"adventure": "0",
+		"scifi": "0",
+		"thriller": "0"
 	}
 	]
 }

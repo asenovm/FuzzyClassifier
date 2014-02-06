@@ -13,7 +13,7 @@ import edu.fmi.fuzzy.classifier.view.ClassificationView;
 
 public class FuzzyClassifier implements OnSubmitListener {
 
-	private static final int NEIGHBOURS_COUNT = 1;
+	private static final int NEIGHBOURS_COUNT = 3;
 
 	private MovieIndex index;
 
